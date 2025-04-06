@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Rentals</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            display: flex;
+            height: 100vh;
+        }
+        .sidebar {
+            width: 200px;
+            background: #2c3e50;
+            color: white;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            margin: 10px 0;
+        }
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+        .filters {
+            background: #ecf0f1;
+            padding: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            gap: 10px;
+        }
+        .listings {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+        }
+        .house {
+            background: #bdc3c7;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Menu</h2>
+        <a href="http://127.0.0.1:8000/search/">Home</a>
+        <a href="#">Settings</a>
+    </div>
+    <div class="main-content">
+        <div class="filters">
+            <select>
+                <option>Filter 1</option>
+                <option>Filter 2</option>
+            </select>
+            <select>
+                <option>Filter A</option>
+                <option>Filter B</option>
+            </select>
+            <button>Apply</button>
+        </div>
+        <h2>Listings</h2><br>
+        <div class="listings">
+            {% block content %}
+            {% for house in houses %}
+            <div class="house">  
+                <h3>{{house.street}} {{house.city}}, {{house.state_zip}}</h3>
+                <p>{{house.square_feet}} Square Feet</p>
+                <p>{{house.beds}} Bedrooms</p>
+                <p>{{house.baths}} Bathroom</p>
+            </div>
+            {% endfor %}
+            {% endblock %}
+        </div>
+    </div>
+</body>
+</html>
